@@ -1,0 +1,14 @@
+const {OpenAIAPI} = require('openai');
+
+const openai = new OpenAI('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');
+
+async function main() {
+  const completion = await openai.chat.completions.create({
+    messages: [{ role: "system", content: "You are a helpful assistant." }],
+    model: "gpt-3.5-turbo",
+  });
+
+  console.log(completion.choices[0]);
+}
+
+main();
