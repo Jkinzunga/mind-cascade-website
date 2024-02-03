@@ -11,10 +11,8 @@
 
 </head>
 <body class="body">
-    <header> 
-         
-            <h1>Mind Cascade</h1> 
-            
+    <header>
+        <h1>Mind Cascade</h1>         
     </header>
 
     <div id="menu">
@@ -25,14 +23,56 @@
 
     <center>
     <div id="chat-box-inner">
-        <p>Welcome to your Journal</p>
-        <p>Responses go here.....</p>
 
-        <div class="ai-prompt">
-            hello
+        <p>Welcome to your Journal</p> 
+        <div id="chatbox"></div>
+        <div id="inputContainer">
+            <input type="text" id="userInput" placeholder="Type Your message...">
+            <button id="sendButton" onclick="sendMessage()">Send</button>
         </div>
+        
+        <script>
+            const chatbox = document.getElementById('chatbox');
+            const userInput = document.getElementById('userInput');
+    
+            function sendMessage() {
+                const message = userInput.value.trim();
+                if (message !== '') {
+                    appendMessage(message, 'user');
+                    userInput.value = '';
+                    setTimeout(() => {
+                        const reply = generateReply(message);
+                        appendMessage(reply, 'bot');
+                    }, 500);
+                }
+            }
+    
+            function generateReply(message) {
+                if (message.includes('hello')) {
+                    return 'Hello! How can I help you today?';
+                } else if (message.includes('how are you')) {
+                    return "'I am just a computer program, but I'm doing well. Thanks for asking!'";
+                } else {
+                    return "'I'm sorry, I didn't understand that. Can you please rephrase?' ";
+                }
+            }
+    
+            function appendMessage(text, sender) {
+                const messageElement = document.createElement('p');
+                messageElement.classList.add(sender);
+                messageElement.textContent = text;
+                chatbox.appendChild(messageElement);
+            }
+    
+            // Example conversation
+            appendMessage('Hello, how can I assist you today?', 'bot');
+        </script>
+      
     </div>
+    
     </center>
+
+    
 
 
     
